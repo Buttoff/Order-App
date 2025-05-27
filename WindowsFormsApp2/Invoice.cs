@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DateBase;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp2
@@ -83,6 +84,36 @@ namespace WindowsFormsApp2
             string price = textBox11.Text;
 
             DateBase.DB.AddInvoice(trackNumber, shipping_address, deliveryAddress, weight, volume, comments, transportType, state, price);
+            LoadDataToDataGridView();
+        }
+
+
+
+        private void LoadDataToDataGridView()
+        {
+            string sqlQuery = "SELECT * FROM invoices";
+
+            DataTable data = DB.GetData(sqlQuery);
+
+            dataGridView1.DataSource = data;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Invoice_Load(object sender, EventArgs e)
+        {
+            LoadDataToDataGridView();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string id = textBox7.Text;
+            string tableName = "invoices";
+            DB.DeletingFromDB(tableName, id);
+            LoadDataToDataGridView();
         }
     }
 }

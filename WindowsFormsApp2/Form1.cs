@@ -26,7 +26,7 @@ namespace WindowsFormsApp2
             {
                 DB.OpenConnection();
 
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(*) FROM users WHERE username = @name AND password = @pass", DB.GetConnection());
+                MySqlCommand command = new MySqlCommand("SELECT COUNT(*) FROM admins WHERE name = @name AND password = @pass", DB.GetConnection());
                 command.Parameters.AddWithValue("@name", textBoxName.Text);
                 command.Parameters.AddWithValue("@pass", textBoxPass.Text);
 
